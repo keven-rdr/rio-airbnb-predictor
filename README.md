@@ -13,7 +13,7 @@ Este projeto treina e entrega um **modelo de regressão** para prever preços di
 > Links de referência usados como base:
 >
 > * Kaggle (datasets): [https://www.kaggle.com/](https://www.kaggle.com/)
-> * scikit-learn (documentação de modelos e utilitários): [https://scikit-learn.org/stable/modules/generated/](https://scikit-learn.org/stable/modules/generated/)
+> * scikit-learn (documentação de modelos e utilitários): [https://scikit-learn.org/stable/](https://scikit-learn.org/stable/)
 
 Coloquei todos os passos necessários para reproduzir o treinamento, preparar os dados, buscar hiperparâmetros, montar um ensemble por *voting* e salvar o artefato final utilizado pela interface.
 
