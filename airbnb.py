@@ -14,7 +14,6 @@ st.set_page_config(
     layout="wide"
 )
 
-# Estilo CSS para deixar o botão e títulos mais bonitos
 st.markdown("""
     <style>
     .big-font { font-size:24px !important; font-weight: bold; color: #FF5A5F; }
@@ -112,12 +111,9 @@ st.divider()
 if st.button("CALCULAR PREÇO SUGERIDO 🚀"):
     
     # --- PASSO 1: Construir o DataFrame de Entrada ---
-    # Criamos uma linha zerada com TODAS as colunas que o modelo conhece
     entrada = pd.DataFrame(0, index=[0], columns=colunas_modelo)
     
-    # --- PASSO 2: Preencher Numéricos (COM BLINDAGEM) ---
-    # Só preenchemos se a coluna existir no modelo treinado (Evita erro "unseen feature")
-    
+    # --- PASSO 2: Preencher Numéricos (COM BLINDAGEM) ---    
     if 'latitude' in entrada.columns: entrada['latitude'] = lat
     if 'longitude' in entrada.columns: entrada['longitude'] = lon
     if 'accommodates' in entrada.columns: entrada['accommodates'] = accommodates
@@ -129,7 +125,6 @@ if st.button("CALCULAR PREÇO SUGERIDO 🚀"):
     if 'num_amenities' in entrada.columns: entrada['num_amenities'] = amenities
     if 'host_listings_count' in entrada.columns: entrada['host_listings_count'] = 3
     
-    # Datas: Se o modelo não tiver 'year', ele ignora e não dá erro
     if 'year' in entrada.columns: entrada['year'] = datetime.now().year
     if 'month' in entrada.columns: entrada['month'] = datetime.now().month
     
@@ -143,7 +138,6 @@ if st.button("CALCULAR PREÇO SUGERIDO 🚀"):
     marcar_coluna('property_type', tipo_imovel)
     marcar_coluna('room_type', tipo_quarto)
     
-    # Proteção para Booleanos (tenta as duas formas comuns)
     if is_superhost:
         if 'host_is_superhost_t' in entrada.columns: entrada['host_is_superhost_t'] = 1
         elif 'host_is_superhost_True' in entrada.columns: entrada['host_is_superhost_True'] = 1
@@ -177,7 +171,6 @@ if st.button("CALCULAR PREÇO SUGERIDO 🚀"):
     # 2. Gráfico de Sazonalidade
     st.subheader("📊 Sazonalidade (Variação durante o ano)")
     
-    # Só faz sentido mostrar sazonalidade se o modelo conhecer a coluna 'month'
     if 'month' in entrada.columns:
         df_sazonal = pd.concat([entrada]*12, ignore_index=True)
         df_sazonal['month'] = range(1, 13) # Jan a Dez
